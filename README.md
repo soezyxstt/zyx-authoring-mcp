@@ -14,18 +14,21 @@ Endpoint saat ini adalah staging. Jangan menggantinya menjadi production tanpa i
 - `.claude-plugin/plugin.json` adalah manifest Claude.
 - `.mcp.json` adalah konfigurasi MCP bersama.
 - `claude-desktop-config.example.json` adalah contoh konfigurasi untuk Claude chat tab.
-- `skills/` berisi tiga skill authoring.
+- `skills/` berisi empat skill authoring.
 - `README.md` dan file reference skill adalah dokumentasi client.
 
 Salinan server-side `lib/authoring` tidak termasuk release scope repository ini. Source authoritative tetap berada di repository `zyx-web`; snapshot lokal sebelumnya dikeluarkan agar tidak disalahartikan sebagai runtime server atau source of truth.
 
-## Tiga skill
+## Empat skill
 
-- `zyx-source-pack-mcp` untuk membuat dan mengirim Source Pack.
-- `zyx-idea-bundle-mcp` untuk membuat Idea Bundle dari Source Pack tervalidasi.
-- `zyx-product-bundle-mcp` untuk membuat Product Bundle draft dari Idea yang sudah dipublikasikan.
+- `zyx-source-pack` untuk membuat dan mengirim Source Pack.
+- `zyx-idea-bundle` untuk membuat Idea Bundle dari Source Pack tervalidasi.
+- `zyx-product-bundle` untuk membuat Product Bundle draft dari Idea yang sudah dipublikasikan.
+- `zyx-question-bank` untuk membuat draft bank soal yang tertaut Idea published dalam workflow `quiz_bank`.
 
 Skill adalah instruction layer. Skill tidak menggantikan enforcement layer di server MCP remote.
+
+Semua skill mengarahkan agent untuk mendiskusikan titik keputusan penting dengan operator sebelum melanjutkan, lalu merekomendasikan langkah berikutnya setelah tahap selesai. Skill bersifat netral provider; selain dimuat sebagai plugin di Codex dan Claude, isi SKILL.md dapat ditempel utuh sebagai instructions di host lain seperti ChatGPT yang terhubung ke remote MCP connector.
 
 ## Autentikasi
 

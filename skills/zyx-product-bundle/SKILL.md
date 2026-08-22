@@ -1,9 +1,9 @@
 ---
-name: zyx-product-bundle-mcp
+name: zyx-product-bundle
 description: Menghasilkan Product Bundle V2 draft dari Source Pack dan Idea yang telah dipublikasikan, dengan Artikel, Diktat, flashcard, contoh soal ITB, solusi, blueprint, dependency, provenance, dan quality gate MCP. Gunakan saat membuat Product Bundle. Jangan gunakan untuk membuat Source Pack atau Idea Bundle.
 ---
 
-# Zyx Product Bundle MCP
+# Zyx Product Bundle
 
 Gunakan skill ini sebagai instruction layer untuk MCP. MCP adalah enforcement layer untuk schema, checksum, provenance, dependency, chapter scope, published Idea, Article compiler, dan content quality. Baca [references/workflow.md](references/workflow.md) sebelum mulai.
 
@@ -34,6 +34,19 @@ Article harus memenuhi kedalaman minimum per Idea, explicit attribution pada mul
 
 Jangan mengubah checksum manifest setelah mengubah isi. Jangan memasukkan `HOLDOUT_CANARY`, correct-answer snapshot runtime, atau marker internal ke Product Bundle. Semua question harus memiliki satu solution, ITB source, dan ITB curation yang memuat reference tersebut. Product Bundle berstatus draft; hanya admin yang dapat review, edit, publish, atau withdraw.
 
+## Titik diskusi dengan operator
+
+- Konfirmasikan konteks run `idea_product`, termasuk course, chapter, dan versi Idea published yang dipakai bila tersedia lebih dari satu kandidat.
+- Untuk question Product, tampilkan kandidat soal ITB yang benar-benar ada pada Source Pack, lalu minta operator memilih mana yang masuk bundle.
+- Bila dependency publicationBlocked atau context stale, jelaskan pilihan menunggu publikasi, mengganti referensi, atau menghentikan pekerjaan, lalu minta keputusan operator.
+- Sajikan temuan quality gate di bawah ambang beserta metriknya, lalu sepakati prioritas revisi sebelum mengubah isi secara besar.
+
 ## Selesai
 
 Laporkan bundle ID, checksum, jumlah produk per jenis, dependency status, quality report, dan hasil staging. Berhenti bila Idea belum published, context stale, dependency perlu review, atau MCP mengembalikan issue blocking.
+
+Rekomendasikan langkah berikutnya:
+
+- Draft staged menunggu review admin di Zyx. Sampaikan bahwa publication hanya dapat dilakukan admin setelah review.
+- Setelah Product Bundle dipublikasikan, tawarkan skill `zyx-question-bank` untuk membuat bank soal dari Idea published yang sama.
+- Bila context stale karena publikasi lain berjalan lebih dulu, rekomendasikan mengulang authoring dari Source Pack terbaru lewat skill `zyx-source-pack`.
