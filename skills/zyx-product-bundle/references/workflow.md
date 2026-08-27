@@ -20,8 +20,9 @@ MCP checks typed products, checksums, source and Idea provenance, chapter scope,
 
 ## MCP sequence
 
-1. Use the same `idea_product` run and fresh published Idea context.
-2. Build Article first, then Diktat, flashcards, ITB examples, solutions, and blueprint.
-3. Call `authoring.validate_product_bundle` during each revision loop.
-4. Call `authoring.submit_product_bundle` only when the report is green.
-5. Admin reviews, edits, publishes, or withdraws the staged draft. MCP has no publication tool.
+1. Use the same `idea_product` run and fresh published Idea context (`workflow.get_run`, `workflow.get_contract`).
+2. (Optional) Inspect existing products and coverage in the chapter using `knowledge.list_products`, `knowledge.get_product`, `knowledge.search_ideas`, and `analysis.get_coverage`.
+3. Build Article first, then Diktat, flashcards, ITB examples, solutions, and blueprint.
+4. Call `authoring.validate_product_bundle` during each revision loop.
+5. Call `authoring.submit_product_bundle` only when the report is green.
+6. Admin reviews, edits, publishes, or withdraws the staged draft. MCP has no publication tool.

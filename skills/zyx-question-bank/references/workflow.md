@@ -15,14 +15,32 @@ workflow.list
 catalog.list_courses
 catalog.list_chapters { courseKey }
 workflow.start { workflow: "quiz_bank", courseKey, chapterKey }
+workflow.get_run { runToken }
 workflow.get_contract { runToken }
+
+// Catalog, knowledge & analysis inspection
 assessment.list_ideas { runToken, query?, knowledgeKinds?, instructionalRoles?, difficultyLevels?, limit?, offset? }
 assessment.get_idea { runToken, ideaId }
+analysis.get_coverage { runToken }
+assessment.list_questions { runToken, query?, difficulty?, cognitiveLevel?, questionType?, origin?, limit?, offset? }
+assessment.get_question { runToken, questionId }
+assessment.analyze_bank { runToken }
+assessment.find_similar { runToken, questionId, limit? }
+
+// Draft validation & submit
 assessment.validate_quiz_draft { runToken, draftJson }   // repeat until valid
 assessment.submit_quiz_draft { runToken, draftJson }     // requires authoring:stage scope
 ```
 
 `workflow.start` without `sourcePackToken` is valid for quiz_bank. With an optional Source Pack, run `source.ingest` first and then include `sourcePackToken`.
+
+## Discovery & Bank Analysis Tools
+
+During question authoring, use these tools to inspect existing questions and optimize bank balance:
+- `assessment.analyze_bank`: provides breakdown of questions by difficulty, cognitive level, origin, Idea coverage, uncovered Ideas, and over-represented Ideas (>20%).
+- `assessment.find_similar`: queries existing questions with similar difficulty, cognitive level, and prompt keywords to avoid duplicates.
+- `assessment.list_questions` & `assessment.get_question`: browse questions already published in the chapter scope.
+- `analysis.get_coverage`: view Idea coverage matrix against all material artifacts in the chapter.
 
 ## Idea catalog
 
