@@ -1,0 +1,21 @@
+{
+  "name": "zyx-authoring-mcp-staging",
+  "version": "0.1.0",
+  "description": "Orchestrate Source Pack to Idea and Product Bundles, with independent Question Bank authoring through the Zyx MCP.",
+  "author": {
+    "name": "Zyx Academy"
+  },
+  "homepage": "https://staging.zyxacademy.com/",
+  "license": "UNLICENSED",
+  "keywords": [
+    "zyx",
+    "authoring",
+    "pipeline",
+    "mcp",
+    "source-pack",
+    "idea-bundle",
+    "product-bundle",
+    "question-bank"
+  ],
+  "mcpServers": "./.mcp.json"
+}
