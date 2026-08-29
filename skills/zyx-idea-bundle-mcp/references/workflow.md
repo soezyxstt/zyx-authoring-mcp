@@ -25,10 +25,8 @@ MCP checks schema, canonical checksum, source checksums, exact chunk offsets, co
 ## MCP sequence
 
 1. Receive a validated `sourcePackToken` from `source.ingest`.
-2. Start `idea_product` with the opaque course and chapter choices (`workflow.start`).
-3. Obtain scope and contract with `workflow.get_run` and `workflow.get_contract`.
-4. (Optional) Inspect source chunks and existing coverage with `knowledge.list_sources`, `knowledge.get_source`, `knowledge.search_source_chunks`, and `analysis.get_coverage`.
-5. Build the Idea Bundle from the locked Source Pack and run contract.
-6. Call `authoring.validate_idea_bundle` repeatedly during revision.
-7. Call `authoring.submit_idea_bundle` only after validation is green.
-8. Wait for admin review and publication before Product authoring.
+2. Start `idea_product` with the opaque course and chapter choices.
+3. Build the Idea Bundle from the locked Source Pack and run contract.
+4. Call `authoring.validate_idea_bundle` repeatedly during revision.
+5. Call `authoring.submit_idea_bundle` only after validation is green.
+6. Wait for admin review and publication before Product authoring.

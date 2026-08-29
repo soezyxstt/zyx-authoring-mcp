@@ -2,7 +2,7 @@
   "mcpServers": {
     "zyx-authoring": {
       "type": "http",
-      "url": "https://staging.zyxacademy.com/api/mcp/authoring"
+      "url": "https://zyxacademy.com/api/mcp/authoring"
     }
   }
 }

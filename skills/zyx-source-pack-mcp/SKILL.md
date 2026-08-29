@@ -1,11 +1,11 @@
 ---
-name: zyx-source-pack
+name: zyx-source-pack-mcp
 description: Membuat Source Pack Zyx yang lossless dari PDF, DOCX, PPTX, spreadsheet, HTML, atau dokumen akademik lain, lalu mengirimkannya ke Authoring MCP untuk pemeriksaan teknis dan kualitas konten. Gunakan saat menyiapkan atau memperbaiki Source Pack. Jangan gunakan untuk membuat Idea Bundle, Product Bundle, atau soal baru.
 ---
 
-# Zyx Source Pack
+# Zyx Source Pack MCP
 
-Gunakan skill ini sebagai instruction layer. MCP adalah sumber validasi dan tidak boleh dilewati. Baca [references/workflow.md](references/workflow.md) sebelum memproses dokumen dan gunakan contract serta quality response dari MCP bila format diragukan. Repository plugin ini tidak mendistribusikan source server atau validator internal.
+Gunakan skill ini sebagai instruction layer. MCP adalah sumber validasi dan tidak boleh dilewati. Baca [references/workflow.md](references/workflow.md) sebelum memproses dokumen dan baca kontrak repository `lib/authoring/source-pack.ts` bila format diragukan.
 
 ## Tujuan
 
@@ -35,19 +35,6 @@ Jangan menandai dokumen complete bila ada unit, formula, tabel, visual, soal, so
 
 Untuk setiap visual, pastikan `id`, `source-unit`, `kind`, `title`, `purpose`, `elements`, `instructional-meaning`, dan `uncertainty` ada. Graph, plot, chart, number-line, geometry, dan diagram juga membutuhkan `relationships`, `labels`, dan `reading-order` yang tidak kosong.
 
-## Titik diskusi dengan operator
-
-- Bila dokumen lebih dari satu, sepakati urutan dan prioritas pengerjaan dengan operator sebelum mulai.
-- Jangan menebak teks buram, terpotong, atau saling bertentangan. Sajikan potongan meragukan beserta opsi penanganannya kepada operator, lalu gunakan keputusan operator sebagai dasar resolusi marker.
-- Bila operator meminta terjemahan, ringkasan, atau koreksi fakta atas isi dokumen, ingatkan bahwa Source Pack wajib lossless dan pastikan permintaan itu memang ditujukan untuk artifact lain.
-- Setelah `source.ingest` mengembalikan `valid: true`, konfirmasikan pilihan course dan chapter dari pilihan opaque MCP bersama operator sebelum melanjutkan ke workflow lain.
-
 ## Selesai
 
 Laporkan path Source Pack, checksum ZIP, dokumen dan unit, hasil `qualityReport`, dan bahwa setiap binary asli diverifikasi. Jangan membuat Idea atau Product Bundle pada skill ini.
-
-Rekomendasikan langkah berikutnya sesuai tujuan operator:
-
-- Lanjut ke skill `zyx-idea-bundle` menggunakan `sourcePackToken` yang valid untuk membuat Idea Bundle.
-- Bila tujuan akhir adalah bank soal dari Idea yang sudah ada, ingatkan bahwa workflow `quiz_bank` pada skill `zyx-question-bank` dapat dijalankan tanpa Source Pack.
-- Bila masih ada warnings kualitas tersisa, sarankan perbaikan sebelum token dipakai di workflow berikutnya.

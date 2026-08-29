@@ -1,4 +1,0 @@
-interface:
-  display_name: "Zyx Source Pack"
-  short_description: "Build and validate Source Packs through MCP"
-  default_prompt: "Use $zyx-source-pack to build a Source Pack and submit it through the Zyx Authoring MCP."

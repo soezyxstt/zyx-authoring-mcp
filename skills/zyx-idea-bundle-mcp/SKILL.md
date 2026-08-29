@@ -1,9 +1,9 @@
 ---
-name: zyx-idea-bundle
+name: zyx-idea-bundle-mcp
 description: Menghasilkan Idea Bundle V2 dari Source Pack yang telah divalidasi MCP, dengan Idea atomic, source-grounded, provenance lengkap, relasi bebas siklus, dan quality report. Gunakan saat mengubah Source Pack menjadi Idea Bundle. Jangan gunakan untuk menerjemahkan sumber atau membuat Product Bundle.
 ---
 
-# Zyx Idea Bundle
+# Zyx Idea Bundle MCP
 
 Gunakan skill ini sebagai instruction layer untuk MCP. Validator repository dan `authoring.validate_idea_bundle` adalah sumber kebenaran schema, checksum, identity, provenance, dan quality gate. Baca [references/workflow.md](references/workflow.md) sebelum mulai.
 
@@ -31,19 +31,6 @@ Quality gate harus menunjukkan meaningful source coverage 100 persen, provenance
 
 Jangan membuat soal baru, Artikel, Diktat, flashcard, blueprint, atau Product entity pada tahap ini. Soal dan solusi dari Source Pack hanya menjadi bukti atau provenance.
 
-## Titik diskusi dengan operator
-
-- Konfirmasikan course dan chapter dari pilihan opaque MCP bersama operator sebelum memanggil `workflow.start`. Jangan memilih sendiri.
-- Bila ragu apakah dua klaim harus menjadi satu Idea atomic atau dua Idea terpisah, tunjukkan contoh konkretnya dan minta keputusan operator.
-- Kumpulkan kandidat relasi yang hubungannya tidak bisa dijelaskan, lalu diskusikan dengan operator. Jangan membuat relasi hanya agar struktur terlihat lengkap.
-- Bila muncul warning near-duplicate atau formula trace, sajikan pasangan Idea dan bukti yang dimaksud, lalu minta operator memilih antara revisi isi atau melanjutkan dengan warning.
-
 ## Selesai
 
 Laporkan bundle ID, checksum, jumlah source, chunk, Idea, provenance, relasi, quality report, dan hasil staging. Admin tetap melakukan review dan publication Idea sebelum Product Bundle dibuat.
-
-Rekomendasikan langkah berikutnya:
-
-- Pantau status review bersama operator. Begitu Idea dipublikasikan admin, lanjutkan ke skill `zyx-product-bundle` untuk materi ajar atau skill `zyx-question-bank` untuk bank soal.
-- Bila validation masih gagal blocking, ringkas issue utama per entitas dan diskusikan strategi revisi dengan operator sebelum package ulang.
-- Bila banyak warning formula trace muncul dari sumber yang kurang lengkap, rekomendasikan melengkapi sumber lewat skill `zyx-source-pack`.

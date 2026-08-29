@@ -1,30 +1,37 @@
 {
   "name": "zyx-authoring-mcp",
   "version": "0.1.0",
-  "description": "Author and validate Zyx Source Pack, Idea Bundle, Product Bundle, and Question Bank workflows through the Authoring MCP.",
+  "description": "Author and validate Zyx Source Pack, Idea Bundle, and Product Bundle workflows through the Authoring MCP.",
   "author": {
     "name": "Zyx Academy"
   },
-  "homepage": "https://staging.zyxacademy.com/",
-  "repository": "https://github.com/soezyxstt/zyx-authoring-mcp",
+  "homepage": "https://zyxacademy.com/",
   "license": "UNLICENSED",
-  "keywords": ["zyx", "authoring", "mcp", "pipeline", "source-pack", "idea-bundle", "product-bundle", "question-bank"],
+  "keywords": [
+    "zyx",
+    "authoring",
+    "mcp",
+    "source-pack",
+    "idea-bundle",
+    "product-bundle"
+  ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Zyx Authoring MCP",
     "shortDescription": "Author Zyx content through the MCP quality gates.",
-    "longDescription": "Provides four focused skills for Source Pack, Idea Bundle, Product Bundle, and Question Bank authoring, plus a resumable orchestration skill for the Source Pack to Product Bundle pipeline. Each skill guides the agent through operator confirmations at key decision points and recommends the next actions after each stage. The remote MCP server remains the authority for authentication, schema validation, provenance, quality gates, and staging.",
+    "longDescription": "Provides three focused skills for Source Pack, Idea Bundle, and Product Bundle authoring. The remote MCP server remains the authority for authentication, schema validation, provenance, quality gates, and staging.",
     "developerName": "Zyx Academy",
     "category": "Productivity",
-    "capabilities": ["Interactive", "Write"],
-    "websiteURL": "https://staging.zyxacademy.com/",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://zyxacademy.com/",
     "defaultPrompt": [
-      "Run the complete resumable Source Pack to Idea Bundle to Product Bundle pipeline.",
       "Build a Source Pack and validate it through Zyx MCP.",
       "Author an Idea Bundle from a validated Source Pack.",
-      "Author a Product Bundle from published Ideas.",
-      "Author a quiz question bank linked to published Ideas."
+      "Author a Product Bundle from published Ideas."
     ],
     "brandColor": "#2563EB"
   }

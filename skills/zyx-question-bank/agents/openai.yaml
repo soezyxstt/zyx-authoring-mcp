@@ -1,4 +1,0 @@
-interface:
-  display_name: "Zyx Question Bank"
-  short_description: "Author Idea-linked quiz drafts through MCP"
-  default_prompt: "Use $zyx-question-bank to author an Idea-linked quiz draft and iterate until the Zyx MCP validation passes, then submit it for admin review."

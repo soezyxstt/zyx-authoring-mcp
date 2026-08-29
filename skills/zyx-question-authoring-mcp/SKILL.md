@@ -1,9 +1,9 @@
 ---
-name: zyx-question-bank
+name: zyx-question-authoring-mcp
 description: Menyusun draft soal kuis yang terhubung ke Idea published melalui Zyx Authoring MCP, dengan scope mata kuliah dan bab yang dikunci, filter katalog Idea, tag, difficulty, cognitive level, bobot Idea link, validasi agregat, dan staging untuk review admin. Gunakan saat membuat atau merevisi bank soal kuis dari Idea yang sudah ada. Jangan gunakan untuk membuat Idea Bundle atau Product Bundle.
 ---
 
-# Zyx Question Bank
+# Zyx Question Authoring MCP
 
 Gunakan skill ini sebagai instruction layer untuk MCP quiz_bank. MCP adalah enforcement layer untuk scope mata kuliah dan bab, status published Idea, bobot link, dan review admin. Baca [references/workflow.md](references/workflow.md) sebelum mulai.
 
@@ -24,7 +24,7 @@ Skill ini netral provider dan berlaku untuk host apa pun yang bisa memanggil MCP
 3. Panggil `workflow.get_contract`. Patuhi `scopeGuidance`: enum difficulty, cognitive level, question type, idea role, aturan bobot, dan aturan tag.
 4. Petakan Idea dengan `assessment.list_ideas`. Gunakan `query` untuk pencarian teks, serta filter `knowledgeKinds`, `instructionalRoles`, dan `difficultyLevels`. Baca `facets` untuk melihat distribusi dan lanjutkan paging lewat `paging.nextOffset`.
 5. Untuk Idea kandidat, panggil `assessment.get_idea` guna membaca relasi prerequisite dan provenance sebelum menautkan soal.
-6. Susun draft `question-bank-draft.v2`. Setiap soal mencantumkan prompt, options, correctIndices, explanation, difficulty, cognitiveLevel, reasoningPattern, tags, dan ideaLinks. Untuk soal yang memiliki ideaLinks, bobot positifnya harus berjumlah tepat 1 dan semua Idea yang ditaut wajib published dalam scope run.
+6. Susun draft `question-bank-draft.v2`. Setiap soal mencantumkan prompt, options, correctIndices, explanation, difficulty, cognitiveLevel, reasoningPattern, tags, dan ideaLinks. Bobot positif ideaLinks harus berjumlah tepat 1 dan semua Idea wajib published dalam scope run.
 7. Panggil `assessment.validate_quiz_draft`. Perbaiki semua issue blocking, lalu tinjau warnings seperti coverage gap dan pembahasan kosong. Ulangi sampai `valid: true`.
 8. Panggil `assessment.submit_quiz_draft` hanya setelah valid. MCP menyimpan soal berstatus generated untuk review admin dan tidak dapat publish.
 
@@ -32,19 +32,6 @@ Skill ini netral provider dan berlaku untuk host apa pun yang bisa memanggil MCP
 
 Tutup sebanyak mungkin Idea pada katalog agar tidak ada coverage gap. Sesuaikan difficulty dan cognitiveLevel dengan tujuan pembelajaran bab, bukan seragam. Tag dipakai konsisten huruf kecil sebagai penanda subtopik. Jangan mengarang ideaId di luar hasil `assessment.list_ideas`; referensi basi akan ditolak sebagai not found atau scope mismatch.
 
-## Titik diskusi dengan operator
-
-- Sepakati target jumlah soal, distribusi difficulty dan cognitiveLevel, serta ambang coverage Idea sebelum menyusun draft agar iterasi validasi memiliki acuan yang sudah disetujui operator.
-- Sebelum menulis soal dalam jumlah besar, sajikan ringkasan kandidat Idea beserta peran primary atau supporting, lalu minta persetujuan operator.
-- Saat warnings muncul seperti coverage gap atau pembahasan kosong, tampilkan daftarnya dan tanyakan mana yang wajib diperbaiki dan mana yang boleh diterima sebagai sisa warnings.
-- Bila katalog hanya berisi sedikit Idea published atau scope tidak sesuai kebutuhan operator, konfirmasikan apakah lanjut dengan cakupan terbatas atau hentikan run.
-
 ## Selesai
 
 Laporkan jumlah soal, jumlah soal tertaut Idea, distribusi difficulty dan cognitive level, sisa warnings, `questionIds` yang dibuat, dan status `admin_review`. Berhenti bila ada issue blocking yang tidak bisa diperbaiki atau scope belum dikunci.
-
-Rekomendasikan langkah berikutnya:
-
-- Soal staged menunggu review admin pada alur review bank soal Zyx. Sampaikan bahwa publication hanya dilakukan admin.
-- Bila masih ada warnings, tawarkan iterasi tambahan setelah masukan admin tersedia.
-- Bila bab belum memiliki Product Bundle, tawarkan skill `zyx-product-bundle`; bila Idea pendukung belum tersedia, arahkan operator kembali ke skill `zyx-idea-bundle`.
