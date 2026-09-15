@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "zyx-authoring": {
+    "zyx-authoring-production": {
       "type": "http",
       "url": "https://www.zyxacademy.com/api/mcp/authoring"
     }
