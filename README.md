@@ -2,7 +2,7 @@
 
 This package connects an MCP host to the Zyx Authoring MCP at:
 
-`https://staging.zyxacademy.com/api/mcp/authoring`
+`https://www.zyxacademy.com/api/mcp/authoring`
 
 It includes six active authoring skills from this repository:
 

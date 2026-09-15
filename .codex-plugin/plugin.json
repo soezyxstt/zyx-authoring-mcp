@@ -5,7 +5,7 @@
   "author": {
     "name": "Zyx Academy"
   },
-  "homepage": "https://zyxacademy.com/",
+  "homepage": "https://www.zyxacademy.com/",
   "license": "UNLICENSED",
   "keywords": [
     "zyx",
@@ -30,7 +30,7 @@
       "Interactive",
       "Write"
     ],
-    "websiteURL": "https://zyxacademy.com/",
+    "websiteURL": "https://www.zyxacademy.com/",
     "defaultPrompt": [
       "Run or resume the end-to-end authoring pipeline from course sources through validated Idea and Product Bundles.",
       "Build a Source Pack from stored course PDFs and validate it through Zyx MCP.",
