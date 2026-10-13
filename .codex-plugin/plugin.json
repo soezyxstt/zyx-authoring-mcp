@@ -1,6 +1,6 @@
 {
   "name": "zyx-authoring-mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Author production Zyx content through MCP quality gates.",
   "author": {
     "name": "Zyx Academy"
@@ -40,6 +40,8 @@
       "Author an Idea-linked Question Bank draft for admin review.",
       "Ingest stored historical question and solution PDFs into immutable attributed drafts."
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#2563EB",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
   }
 }
