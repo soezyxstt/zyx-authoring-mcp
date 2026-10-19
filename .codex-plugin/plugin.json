@@ -1,6 +1,6 @@
 {
   "name": "zyx-authoring-mcp",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Author production Zyx content through MCP quality gates.",
   "author": {
     "name": "Zyx Academy"
@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Zyx Authoring MCP",
     "shortDescription": "Author production Zyx content through MCP quality gates.",
-    "longDescription": "Provides one end-to-end authoring pipeline and five independently invocable specialist skills for prompt-only Source Pack, Idea Bundle, Product Bundle, Question Bank, and historical reference authoring. The remote MCP server remains the authority for authentication, schema validation, provenance, quality gates, and staging.",
+    "longDescription": "Provides one end-to-end authoring pipeline and five independently invocable specialist skills for prompt-only Source Pack, Idea Bundle, Product Bundle, Question Bank, and historical reference authoring. The remote MCP server serves active stage playbooks via workflow.get_playbook and remains the authority for authentication, schema validation, provenance, quality gates, and staging.",
     "developerName": "Zyx Academy",
     "category": "Productivity",
     "capabilities": [
@@ -38,7 +38,7 @@
       "Author an Idea Bundle from a validated Source Pack.",
       "Author a Product Bundle from published Ideas.",
       "Author an Idea-linked Question Bank draft for admin review.",
-      "Ingest stored historical question and solution PDFs into immutable attributed drafts."
+      "Ingest stored historical question and solution PDFs into immutable attributed reference records."
     ],
     "brandColor": "#2563EB",
     "composerIcon": "./assets/logo.png",

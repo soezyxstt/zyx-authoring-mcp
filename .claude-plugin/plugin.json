@@ -1,6 +1,6 @@
 {
   "name": "zyx-authoring-mcp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Author production Zyx content through MCP quality gates.",
   "author": {
     "name": "Zyx Academy"
