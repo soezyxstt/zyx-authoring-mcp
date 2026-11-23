@@ -8,7 +8,7 @@ description: Menyusun atau merevisi soal `zyx_original` yang wajib terhubung ke 
 Skill ini menyusun dan merevisi draft soal kuis `zyx_original` yang terhubung ke Idea published pada workflow `quiz_bank`. Seluruh urutan tool analisis bank soal, skema `question-bank-draft.v2`, aturan bobot `ideaLinks`, dan rubrik kualitas soal/distraktor disajikan oleh server saat runtime melalui `workflow.get_playbook` dan `workflow.get_contract`.
 
 <!-- BEGIN:environment-connection -->
-Gunakan koneksi MCP `zyx-authoring-production` untuk environment `production` di endpoint `https://www.zyxacademy.com/api/mcp/authoring` (`pluginVersion: "0.4.1"`, `bootstrapProtocol: 1`). Jangan gunakan koneksi Zyx dari environment lain. Verifikasi identitas koneksi sebelum memulai run atau melakukan staging.
+Gunakan koneksi MCP `zyx-authoring-production` untuk environment `production` di endpoint `https://www.zyxacademy.com/api/mcp/authoring` (`pluginVersion: "0.5.1"`, `bootstrapProtocol: 1`). Jangan gunakan koneksi Zyx dari environment lain. Verifikasi identitas koneksi sebelum memulai run atau melakukan staging.
 <!-- END:environment-connection -->
 
 ## Identitas bootstrap dan protokol
@@ -16,7 +16,7 @@ Gunakan koneksi MCP `zyx-authoring-production` untuk environment `production` di
 - **Skill ID**: `zyx-question-authoring-mcp`
 - **Stage**: `quiz`
 - **Bootstrap protocol**: `1`
-- **Plugin version**: `0.4.1`
+- **Plugin version**: `0.5.1`
 - **Modul playbook wajib**: `common/execution`, `quiz/workflow`, `quiz/quality`
 
 ## Langkah bootstrap wajib (fail-closed)
@@ -27,7 +27,7 @@ Gunakan koneksi MCP `zyx-authoring-production` untuk environment `production` di
      "skill": "zyx-question-authoring-mcp",
      "stage": "quiz",
      "bootstrapProtocol": 1,
-     "pluginVersion": "0.4.1",
+     "pluginVersion": "0.5.1",
      "clientCapabilities": {
        "independentSubagents": true,
        "localArtifactFiles": true,
@@ -39,6 +39,12 @@ Gunakan koneksi MCP `zyx-authoring-production` untuk environment `production` di
 3. Baca seluruh modul wajib (`common/execution`, `quiz/workflow`, `quiz/quality`) dari respons `workflow.get_playbook`.
 4. Kunci `courseKey` dan `chapterKey` bersama operator dari label manusia, panggil `workflow.start` (`workflow: "quiz_bank"`) dengan `bootstrapToken`, lalu panggil `workflow.get_contract` untuk mengunci kontrak aktif.
 5. Teruskan `runToken` dan `bootstrapToken` ke `assessment.validate_quiz_draft`, `assessment.submit_quiz_draft`, dan `assessment.update_question`. Jika terjadi drift revisi playbook atau contract sebelum submit, ambil ulang `workflow.get_playbook` dan `workflow.get_contract`, periksa kembali draft terhadap aturan terbaru, lalu validasi ulang.
+
+Untuk visual soal, baca `outputs.quizDraft.visualAuthoring` dan schema visual aktif dari server. Gunakan `zyx-visual` dengan data bertipe, dan simpan keadaan atau label khusus jawaban di pembahasan, bukan prompt atau opsi.
+
+Untuk `interactive_document`, sertakan `visualAssets` pada validasi, submit, dan update visual baru atau berubah: array `{ path, sha256, bytes, base64 }` untuk setiap HTML dan PNG unik sesuai hash di metadata. Update yang hanya mempertahankan spec terikat dapat memakai ulang aset asli yang diverifikasi server tanpa mengirim byte ulang. Jangan taruh HTML atau base64 dalam teks soal. Aset prompt atau opsi tidak boleh dipakai ulang pada pembahasan; baca batas dan format lengkap pada playbook server.
+
+Untuk pasangan lokal yang sudah ditinjau, contoh yang dapat dijalankan ada di `scripts/authoring/package-interactive-document.ts` pada checkout repositori. Ambil kontrak live dan susun soal sendiri; hasilnya belum merupakan persetujuan soal.
 
 ## Invariant lokal dan batas keamanan
 
