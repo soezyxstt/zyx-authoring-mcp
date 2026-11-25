@@ -1,0 +1,4 @@
+interface:
+  display_name: "Zyx Operation Recovery"
+  short_description: "Recover exact operations without duplicate effects"
+  default_prompt: "Use $zyx-operation-recovery to inspect the original operation on the same environment and actor, preserve its payload and identity, and reconcile uncertain provider work from evidence without duplicate effects."
