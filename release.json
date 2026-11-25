@@ -1,6 +1,6 @@
 {
   "schemaVersion": "authoring-plugin-release.v1",
-  "version": "0.4.1",
+  "version": "0.5.2",
   "bootstrapProtocol": 1,
   "minCompatibleVersion": "0.2.0",
   "skills": [
@@ -9,6 +9,12 @@
     "zyx-idea-bundle-mcp",
     "zyx-product-bundle-mcp",
     "zyx-question-authoring-mcp",
-    "reference-question-ingest"
+    "reference-question-ingest",
+    "zyx-admin-operations",
+    "zyx-blog-mcp",
+    "zyx-content-revisions",
+    "zyx-forms-mcp",
+    "zyx-media-mcp",
+    "zyx-operation-recovery"
   ]
 }
