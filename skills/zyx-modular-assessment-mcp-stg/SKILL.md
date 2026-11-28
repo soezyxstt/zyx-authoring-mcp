@@ -6,7 +6,7 @@ description: Membuat atau memperbarui kuis, tryout, soal tunggal, serta pembahas
 # Kuis, Tryout, dan Pembahasan Modular via MCP
 
 <!-- BEGIN:environment-connection -->
-Gunakan koneksi MCP `zyx-stg` untuk environment `staging` di endpoint `https://staging.zyxacademy.com/api/mcp/authoring` (`pluginVersion: "0.5.8"`, `bootstrapProtocol: 1`). Jangan gunakan koneksi Zyx dari environment lain. Verifikasi identitas koneksi sebelum memulai run atau melakukan staging.
+Gunakan koneksi MCP `zyx-stg` untuk environment `staging` di endpoint `https://staging.zyxacademy.com/api/mcp/authoring` (`pluginVersion: "0.5.9"`, `bootstrapProtocol: 1`). Jangan gunakan koneksi Zyx dari environment lain. Verifikasi identitas koneksi sebelum memulai run atau melakukan staging.
 
 Panggil nama tool dari `tools/list`. Nama bertitik di skill ini merujuk ke operasi; nama panggilan biasanya mengganti titik dengan `_`, seperti `admin_environment`. Pengecualian: `authoring.get_solution_collection_review_context` memakai `authoring_solution_review_context`. Pertahankan nama bertitik pada argumen `operation` serta identitas konfirmasi dan receipt.
 
@@ -35,6 +35,8 @@ Baca resource `ui://zyx-authoring/modular-assessment-sdk.md` bila butuh penginga
 
 ## Assessment UI-SDK v1 (`promptUi` & `explanationUi`)
 
+Gunakan `{ version: 1, layout: "standard" | "compact", blocks: [...] }`; `layout` opsional. Baca schema tiap visual pada kontrak live, jangan menebak isi `spec` dari nama blok. Artikel/Diktat memakai katalog bersama melalui visual `learning_ui` di [skill Product](../zyx-product-bundle-mcp-stg/SKILL.md#ui-sdk-dan-visual-belajar), dengan batas jenis dan padanan cetak sendiri.
+
 Susun `blocks` sesuai kebutuhan soal; tidak ada komponen yang wajib dipakai jika soal sederhana (boleh 1 blok `markdown` saja):
 - `markdown`: narasi teks dan rumus KaTeX (`$...$`, `$$...$$`).
 - `steps`: pembahasan multi-langkah (otomatis tampil paginated di sisi siswa; sertakan hanya bila soal memang butuh beberapa tahap).
@@ -58,3 +60,6 @@ Saat memperbarui pembahasan yang sudah ada lewat `authoring.update_question_expl
 
 - Jangan memakai em dash atau en dash di mana pun dalam prompt, opsi, maupun pembahasan; gunakan koma, titik koma, tanda kurung, atau kata `sampai`.
 - Pastikan seluruh rumus, satuan, dan perhitungan diverifikasi sebelum disimpan.
+- Pecah solusi bertahap menurut keputusan dan alasannya. Lipat rincian tambahan tanpa menyembunyikan syarat yang perlu untuk memahami langkah utama.
+- Setiap visual harus menjawab tujuan belajar, memakai model dan rentang yang sah, serta menjelaskan tindakan dan hasil yang perlu diamati. Gunakan notasi matematika yang didukung pada label. Simulasi bukan bukti kebenaran hanya karena schema lolos.
+- Simpan jawaban, petunjuk yang membocorkan jawaban dan keadaan akhir solusi hanya dalam `explanationUi`; jangan memasukkannya ke `promptUi` atau aset prompt.

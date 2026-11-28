@@ -1,4 +1,4 @@
 interface:
   display_name: "Zyx Content Revisions (Staging)"
-  short_description: "Edit stable units and release reviewed Zyx revisions"
-  default_prompt: "Use $zyx-content-revisions-stg to find current heads, edit stable units and retain successor identities. Review affected reasoning and Diktat units. For V4, verify purpose logic during edits and request purpose pdf only for final Diktat artifacts; screenshots are optional. Read full context before authorized release and retain exact logic and PDF identities. Use only the zyx-stg MCP connection; use advertised tool names and keep dotted operation arguments unchanged."
+  short_description: "Edit stable Zyx content, UI visuals and print fallbacks"
+  default_prompt: "Use $zyx-content-revisions-stg to edit stable units and UI SDK visuals with matching print fallbacks. Retain successor identities and affected Diktat lineage. Verify V4 logic without a browser, request final PDFs only when needed, and read full context before authorized release. Use only the zyx-stg MCP connection; use advertised tool names and keep dotted operation arguments unchanged."

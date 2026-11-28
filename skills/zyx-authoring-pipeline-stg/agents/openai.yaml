@@ -1,4 +1,4 @@
 interface:
   display_name: "Zyx Authoring Pipeline (Staging)"
-  short_description: "Atur alur Source, Idea, dan Product hingga rilis"
-  default_prompt: "Use $zyx-authoring-pipeline-stg with compact live contracts, fresh bootstrap and supported typed drafts. Review V4 content and calculations with purpose logic, without browser captures; request purpose pdf separately for final Diktat artifacts. Reuse unchanged content and PDFs, then check exact revision readiness before authorized publication. Use only the zyx-stg MCP connection; use advertised tool names and keep dotted operation arguments unchanged."
+  short_description: "Atur Source, Idea, Product dan visual UI SDK hingga rilis"
+  default_prompt: "Use $zyx-authoring-pipeline-stg with live contracts, fresh bootstrap and shared UI SDK learning visuals where supported. Keep product formats, sources and print fallbacks aligned. Review V4 logic without browser captures and request final Diktat PDFs separately before authorized publication. Use only the zyx-stg MCP connection; use advertised tool names and keep dotted operation arguments unchanged."
