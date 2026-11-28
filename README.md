@@ -15,7 +15,7 @@ For a local MCP snapshot, render an environment package with `scripts/configure_
 
 - Environment: `staging`
 - Plugin ID: `zyx-stg`
-- Release version: `0.5.7`
+- Release version: `0.5.8`
 - Bootstrap protocol: `1`
 - MCP server ID: `zyx-stg`
 - Endpoint: `https://staging.zyxacademy.com/api/mcp/authoring`
