@@ -2,7 +2,9 @@
 
 This package connects an MCP host to one explicitly named Zyx environment. Focused skills route academic authoring, content revisions, blogs, forms, media and recovery to the server's current capabilities.
 
-Release 0.5.6 separates V4 content verification from final Diktat PDFs. Default `purpose: "logic"` checks structure, references, notation and supported models without a browser. Explicit `purpose: "pdf"` generates final artifacts and reuses unchanged current targets. Screenshots, page captures and visual inspection are optional. Semantic review remains required, and included Diktats still need canonical current PDF bytes before publication. Legacy V2/V3 retain their policy. Source changes do not publish a package or update an installed host.
+Release 0.5.9 adds authoring guidance for the shared UI SDK in Articles and Diktats: structured steps, formulas, graphs, 3D scenes and typed simulations through `learning_ui`, with a meaningful static fallback. Read the live visual contract before using a block; this Product wrapper has stricter limits than quiz UI. Quiz/tryout skills use the same block vocabulary through their existing fields, while flashcards and V5 keep their own schemas.
+
+V4 separates content verification from final Diktat PDFs. Default `purpose: "logic"` checks structure, references, notation and supported models without a browser. Explicit `purpose: "pdf"` generates final artifacts and reuses unchanged current targets. Screenshots, page captures and visual inspection are optional. Semantic review remains required, and included Diktats still need canonical current PDF bytes before publication. Legacy V2/V3 retain their policy. Source changes do not publish a package or update an installed host.
 
 Discover tools and contracts on the selected host before using a new capability. A newer package does not prove that the connected server has deployed it. Use a supported archive path when a direct-draft tool is absent; do not guess fields or substitute an environment. Fetch schema descriptors once per checksum and load only the playbook modules needed for the current work. Renew bootstrap at stage changes, resume or reported drift, then retain the replacement run token.
 
@@ -15,7 +17,7 @@ For a local MCP snapshot, render an environment package with `scripts/configure_
 
 - Environment: `staging`
 - Plugin ID: `zyx-stg`
-- Release version: `0.5.8`
+- Release version: `0.5.9`
 - Bootstrap protocol: `1`
 - MCP server ID: `zyx-stg`
 - Endpoint: `https://staging.zyxacademy.com/api/mcp/authoring`
@@ -76,7 +78,7 @@ This package exports 15 skills:
 
 For admin workflows, call `admin.environment` on the intended connection, compare its environment and origin, then call `admin.capabilities` for the relevant domain. Use only advertised operations and granted scopes. Discovery metadata does not grant permission. Blog, forms, media and operation recovery do not require an academic Source Pack or an authoring run.
 
-Initial academic authoring uses thin stage entrypoints. Detailed editorial rubrics, schema contracts, reconciliation checklists and stage workflows come from `workflow.get_playbook` and `workflow.get_contract`. Before authoring a stage or resuming its checkpoint, request a fresh playbook using the canonical role from its explicit `skill` argument, `bootstrapProtocol: 1`, `pluginVersion: "0.5.6"`, and accurate `clientCapabilities`. Pass the returned bootstrap token to the applicable workflow and stage tools. If bootstrap fails or is incompatible, stop instead of using cached instructions.
+Initial academic authoring uses thin stage entrypoints. Detailed editorial rubrics, schema contracts, reconciliation checklists and stage workflows come from `workflow.get_playbook` and `workflow.get_contract`. Before authoring a stage or resuming its checkpoint, request a fresh playbook using the canonical role from its explicit `skill` argument, `bootstrapProtocol: 1`, `pluginVersion` from the active `release.json`, and accurate `clientCapabilities`. Pass the returned bootstrap token to the applicable workflow and stage tools. If bootstrap fails or is incompatible, stop instead of using cached instructions.
 
 For V4 Article/Diktat drafts, use local `bun run authoring:preview --input draft.json --check` for browser-free structural preflight. Rendering and `--watch` are optional inspection tools, not release gates. Review content and calculations against sources, request purpose logic for the exact staged revision, and request purpose pdf separately when final Diktat artifacts are needed. Missing screenshots or an unavailable preview browser cannot block V4 publication.
 
@@ -90,7 +92,7 @@ Background work uses the Google Cloud Tasks adapter. Agents use the advertised d
 
 ## Host manifests and CLI helpers
 
-- `release.json` is the canonical source for `version` (`0.5.6`), `bootstrapProtocol` (`1`), minimum compatible version (`0.2.0`) and the exact skill inventory.
+- `release.json` is the canonical source for `version`, `bootstrapProtocol` (`1`), minimum compatible version (`0.2.0`) and the exact skill inventory.
 - `.codex-plugin/plugin.json` is the Codex Desktop plugin manifest.
 - `.claude-plugin/plugin.json` is the Claude Code plugin manifest.
 - `.mcp.json` is shared by Codex and Claude Code plugin manifests and contains the environment-specific server ID (`type: "http"`).

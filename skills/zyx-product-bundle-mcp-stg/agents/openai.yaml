@@ -1,4 +1,4 @@
 interface:
   display_name: "Zyx Product Bundle MCP (Staging)"
-  short_description: "Create typed V4/V5 drafts and review exact revisions"
-  default_prompt: "Use $zyx-product-bundle-mcp-stg with compact live contracts and typed drafts. For V4, use purpose logic without a browser, review sources and calculations, and request purpose pdf only for final Diktat artifacts. Reuse unchanged PDFs; screenshots and visual inspection are optional. Retain exact revisions, source provenance and explicit publication authority. Use only the zyx-stg MCP connection; use advertised tool names and keep dotted operation arguments unchanged."
+  short_description: "Create UI SDK learning visuals and reviewed V4/V5 drafts"
+  default_prompt: "Use $zyx-product-bundle-mcp-stg with live typed contracts, learning_ui visuals and meaningful print fallbacks for Articles and Diktats. Review sources and calculations with purpose logic; request purpose pdf only for final Diktats. Keep exact revisions and publication authority. Use only the zyx-stg MCP connection; use advertised tool names and keep dotted operation arguments unchanged."

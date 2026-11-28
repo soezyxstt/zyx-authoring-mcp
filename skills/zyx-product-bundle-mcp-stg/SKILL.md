@@ -1,12 +1,12 @@
 ---
 name: zyx-product-bundle-mcp-stg
-description: Membuat draft Artikel/Diktat V4, flashcard dan Pembahasan V5 dari JSON bertipe melalui MCP Zyx, dengan preview yang didukung dan review revisi tepat. Gunakan setelah Source Pack valid dan Idea published; gunakan arsip untuk aset biner atau lineage eksternal. Soal asesmen memakai workflow terpisah.
+description: Membuat Artikel/Diktat V4 dengan visual UI SDK, flashcard dan Pembahasan V5 dari JSON bertipe melalui MCP Zyx. Gunakan setelah Source Pack valid dan Idea published; ikuti kontrak live, padanan cetak dan review revisi tepat. Soal asesmen memakai workflow terpisah.
 ---
 
 # Zyx Product Bundle MCP
 
 <!-- BEGIN:environment-connection -->
-Gunakan koneksi MCP `zyx-stg` untuk environment `staging` di endpoint `https://staging.zyxacademy.com/api/mcp/authoring` (`pluginVersion: "0.5.8"`, `bootstrapProtocol: 1`). Jangan gunakan koneksi Zyx dari environment lain. Verifikasi identitas koneksi sebelum memulai run atau melakukan staging.
+Gunakan koneksi MCP `zyx-stg` untuk environment `staging` di endpoint `https://staging.zyxacademy.com/api/mcp/authoring` (`pluginVersion: "0.5.9"`, `bootstrapProtocol: 1`). Jangan gunakan koneksi Zyx dari environment lain. Verifikasi identitas koneksi sebelum memulai run atau melakukan staging.
 
 Panggil nama tool dari `tools/list`. Nama bertitik di skill ini merujuk ke operasi; nama panggilan biasanya mengganti titik dengan `_`, seperti `admin_environment`. Pengecualian: `authoring.get_solution_collection_review_context` memakai `authoring_solution_review_context`. Pertahankan nama bertitik pada argumen `operation` serta identitas konfirmasi dan receipt.
 
@@ -17,7 +17,7 @@ Jika akses kedaluwarsa atau izin kurang, ikuti [pemulihan koneksi](../zyx-operat
 
 ## Mulai dari kontrak aktif
 
-1. Panggil `workflow.get_playbook` pada awal tahap dan saat melanjutkan sesi: `skill: "zyx-product-bundle-mcp"`, `stage: "product"`, `bootstrapProtocol: 1`, `pluginVersion: "0.5.8"`. Isi `clientCapabilities.independentSubagents`, `localArtifactFiles` dan `pdfRendering` sesuai kemampuan nyata. Tahap Product memerlukan subagent independen; jangan menyatakan kemampuan yang tidak ada.
+1. Panggil `workflow.get_playbook` pada awal tahap dan saat melanjutkan sesi: `skill: "zyx-product-bundle-mcp"`, `stage: "product"`, `bootstrapProtocol: 1`, `pluginVersion: "0.5.9"`. Isi `clientCapabilities.independentSubagents`, `localArtifactFiles` dan `pdfRendering` sesuai kemampuan nyata. Tahap Product memerlukan subagent independen; jangan menyatakan kemampuan yang tidak ada.
 2. Baca modul `common/execution`, `product/workflow`, `product/editorial`, `product/quality-rubric`, `product/flashcards` dan `product/derivation-audit` yang dikembalikan. Jika bootstrap gagal atau `compatibility.status` adalah `incompatible`, hentikan authoring dan laporkan `remediation`; jangan menggantinya dengan panduan lokal lama.
 3. Untuk produk baru, pilih scope lewat katalog, lalu mulai atau lanjutkan `idea_product` dengan Source Pack valid dan `bootstrapToken`. Ambil `workflow.get_contract` dengan `runToken` dan bootstrap yang sama. Baca Idea dan learning section published serta sumber/kutipan aktif untuk scope tersebut; cek draft yang ada sebelum membuat yang baru.
 4. Gunakan `productBundle.initialDraft` hanya bila tool itu benar-benar tersedia pada koneksi. Ambil schema `productDraftInput` dari `productBundle.schemaDocuments`: GET `path` pada origin MCP yang sama, cocokkan SHA-256 byte respons dengan `sha256`, lalu simpan untuk revisi kontrak itu. Ambil schema lain hanya saat jenis isi memerlukannya. HTTP 409 atau drift mewajibkan playbook/kontrak segar dan validasi ulang. Katalog tool yang ringkas tidak menggantikan schema isi lengkap.
@@ -34,6 +34,21 @@ Simpan JSON `{ "products": [...] }` sesuai `productDraftInput`. Isi jenis, isi b
 - Flashcard berisi `front`, `back`, satu Idea dan opsional `explanation`/`setId`. Set memberi judul; tanpa `cards`, server mengambil kartu dengan `setId` itu dalam request yang sama. Kartu mandiri dan set kosong tetap sah. Jangan kirim field `atomic` atau versi buatan.
 - Pembahasan V5 mengirim satu `solution_collection` dengan judul dan `items`. Server mengisi ID mekanis serta judul course/bab aktif; ID opsi jawaban tetap eksplisit. Isi provenance soal dan solusi, alasan tiap langkah serta cek jawaban. Jangan campur V5 dengan produk lain.
 - Susun Artikel dengan `parts` sesuai urutan belajar. Jelaskan makna, syarat, simbol, satuan dan alasan tiap langkah matematika. Diktat memuat ringkasan, rumus penting, syarat dan pilihan metode untuk review ujian. Setiap visual perlu tujuan belajar, domain, kontrol dan padanan cetak. Gunakan delimiter matematika dan `\times 10^{n}`, bukan notasi angka `e`.
+
+## UI SDK dan visual belajar
+
+Untuk Artikel/Diktat baru, pakai katalog UI SDK bersama saat langkah bertahap, grafik, hubungan ruang atau perubahan parameter membantu tujuan belajar. Baca `typedVisuals` dan schema visual dari kontrak live sebelum memilih jenis. Jika `learning_ui` belum tersedia, laporkan batas itu; jangan mengirim field baru ke server lama.
+
+- Daftarkan visual dengan `kind: "learning_ui"`, `id`, `label`, `description`, `learningObjective`, `ui` dan `staticFallback`. `ui` memakai `{ version: 1, blocks: [...] }`, sama dengan kuis dan pembahasan. Pertahankan `parts` Artikel serta unit Diktat; tempatkan visual melalui `visual_ref` yang menunjuk ID registry. Diktat tetap memerlukan `staticMarkdown` pada rujukan visual sesuai schema.
+- Pilih `steps` untuk urutan berpikir, `collapsible` untuk rincian tambahan, `formula_card` untuk relasi utama, serta `callout` untuk syarat atau kekeliruan yang nyata. Gunakan `graph`, `scene_3d` atau `interactive_visual` hanya dengan model, rentang dan field yang schema dukung. Pertahankan alasan langkah dan syarat penting agar pembaca tidak perlu membuka semua panel untuk memahami inti materi.
+- `learning_ui` tidak menerima blok `image`, `interactive_visual` berjenis `document`, HTML, JavaScript, SVG mentah atau embed jarak jauh. Figure sumber dan dokumen interaktif tetap memakai jenis visual, aset serta admission khususnya. Jangan menyamakan katalog kuis yang lebih luas dengan izin visual Product.
+- Tulis tindakan pelajar dan hasil yang perlu diamati dekat kontrol. Cocokkan nilai awal, batas parameter, simbol, satuan, rumus serta asumsi dengan sumber. Gunakan notasi matematika yang didukung pada label dan penjelasan. Jumlah kontrol atau animasi bukan ukuran mutu.
+- Isi `staticFallback` sebagai teks (`type: "text"`, `summary`, `content`) atau tabel (`type: "table"`, `summary`, `headers`, `rows`). Padanan cetak harus mengajarkan hubungan dan hasil yang sama tanpa klik, gerak atau kontrol. Jangan hanya menulis ajakan membuka versi web. Tinjau padanan ini bersama `staticMarkdown` dan lineage Diktat yang terdampak.
+- Gunakan field setiap produk sesuai schema: kuis/tryout memakai `promptUi` dan `explanationUi` melalui [skill modular](../zyx-modular-assessment-mcp-stg/SKILL.md); Pembahasan V5 dan flashcard tetap memakai formatnya sendiri. Jangan menambahkan `ui`, `promptUi` atau `explanationUi` ke entity yang tidak mendukungnya, atau merombak kartu recall menjadi penjelasan panjang.
+
+Periksa struktur dan isi UI bersama draft yang sama. Verifikasi logika V4 tetap tanpa browser; PDF akhir Diktat tetap jalur terpisah. Preview opsional tidak memberi bukti bahwa simulasi sudah berjalan atau hitungannya sudah benar.
+
+## Periksa dan simpan draft
 
 Untuk Artikel/Diktat, gunakan JSON yang sama untuk cek struktur tanpa browser bila checkout tersedia:
 
